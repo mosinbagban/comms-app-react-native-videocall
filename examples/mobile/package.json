@@ -25,6 +25,7 @@
     "react-intl": "~6.1.1",
     "react-native": "0.67.2",
     "react-native-camera": "^4.2.1",
+    "react-native-config": "^1.4.11",
     "react-native-encrypted-storage": "^4.0.2",
     "react-native-gesture-handler": "^2.3.2",
     "react-native-permissions": "^3.6.1",
