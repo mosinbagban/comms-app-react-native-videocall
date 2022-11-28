@@ -7,6 +7,7 @@ import {
 import TokenProvider from '@dolbyio/comms-uikit-react-native/src/providers/TokenProvider';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
+import Config from 'react-native-config';
 
 import {Navigator} from './screens/Navigator';
 import fetch from './utils/fetch.util';
@@ -28,7 +29,11 @@ const App = () => {
   return (
     <TranslationProvider>
       <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-        <TokenProvider validateToken={validateToken} fetch={fetch}>
+        <TokenProvider
+          validateToken={validateToken}
+          fetch={fetch}
+          tokenKeysUrl={Config.URL_TOKEN_KEYS}
+          tokenUrl={Config.URL_TOKEN}>
           <CommsProvider>
             <ThemeProvider>
               <Navigator />

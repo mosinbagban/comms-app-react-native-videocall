@@ -3,6 +3,7 @@ plugins {
   id 'com.google.firebase.appdistribution'
   id "com.github.triplet.play"
 }
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 

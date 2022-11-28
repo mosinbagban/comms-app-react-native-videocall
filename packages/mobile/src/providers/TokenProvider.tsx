@@ -19,27 +19,29 @@ type TokenProviderProps = {
   fetch: {
     get(url: string): Promise<never>;
   };
+  tokenUrl: string | null;
+  tokenKeysUrl: string | null;
 };
 
 export const TokenContext = createContext<TokenContext>({
   token: null,
 } as TokenContext);
 
-const TokenProvider: React.FC<TokenProviderProps> = ({ children, validateToken, fetch }) => {
+const TokenProvider: React.FC<TokenProviderProps> = ({ children, validateToken, fetch, tokenUrl, tokenKeysUrl }) => {
   const [key, setKey] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   // INITIALIZATION
 
   const getToken = async () => {
-    const res: { access_token: string } = await fetch.get(`${URL_TOKEN}/${key}`);
+    const res: { access_token: string } = await fetch.get(`${tokenUrl}/${key}`);
     return res.access_token;
   };
 
   useEffect(() => {
     (async () => {
-      if (URL_TOKEN_KEYS) {
-        const keys: { [key: string]: string } = await fetch.get(URL_TOKEN_KEYS);
+      if (tokenKeysUrl) {
+        const keys: { [key: string]: string } = await fetch.get(tokenKeysUrl);
         setKey(Object.keys(keys)[2]);
       }
     })();
